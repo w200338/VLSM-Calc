@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace VLSM_Calc
 {
+    // TODO: implement IComparable
     public class Subnet
     {
         /// <summary>
@@ -29,6 +30,39 @@ namespace VLSM_Calc
         public uint NetworkID { get; }
 
         /// <summary>
+        /// Get last ip in range
+        /// </summary>
+        public uint BroadcastIP
+        {
+            get
+            {
+                return NetworkID + ~SubnetMask;
+            }
+        }
+
+        /// <summary>
+        /// First available ip for a host
+        /// </summary>
+        public uint FirstIP
+        {
+            get
+            {
+                return NetworkID + 1;
+            }
+        }
+
+        /// <summary>
+        /// Last available ip for a host
+        /// </summary>
+        public uint LastIP
+        {
+            get
+            {
+                return BroadcastIP - 1;
+            }
+        }
+
+        /// <summary>
         /// Create a network with 
         /// </summary>
         /// <param name="networkID"></param>
@@ -47,6 +81,28 @@ namespace VLSM_Calc
         {
             NetworkID = networkID;
             SubnetMask = subnetMask;
+        }
+
+        /// <summary>
+        /// Check if this subnet contains this ip
+        /// </summary>
+        /// <param name="ip">IP to test</param>
+        /// <returns></returns>
+        public bool Contains(IPAddress ip)
+        {
+            uint ipUint = ip.ToUINT32();
+
+            return (ipUint >= NetworkID && ipUint <= BroadcastIP);
+        }
+
+        /// <summary>
+        /// Check if this subnet contains this ip
+        /// </summary>
+        /// <param name="ip">IP to test</param>
+        /// <returns></returns>
+        public bool Contains(uint ip)
+        {
+            return (ip >= NetworkID && ip <= BroadcastIP);
         }
     }
 }

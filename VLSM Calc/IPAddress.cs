@@ -2,10 +2,10 @@
 {
     public class IPAddress
     {
-        public byte Byte1 { get; set; }
-        public byte Byte2 { get; set; }
-        public byte Byte3 { get; set; }
-        public byte Byte4 { get; set; }
+        public byte Byte1 { get; set; } = 0;
+        public byte Byte2 { get; set; } = 0;
+        public byte Byte3 { get; set; } = 0;
+        public byte Byte4 { get; set; } = 0;
 
         /// <summary>
         /// Create ip from 4 seperate bytes
@@ -38,6 +38,14 @@
         }
 
         /// <summary>
+        /// Creates an empty ip (0.0.0.0)
+        /// </summary>
+        public IPAddress()
+        {
+
+        }
+
+        /// <summary>
         /// Convert ip address to a 32 bit integer
         /// </summary>
         /// <returns></returns>
@@ -64,5 +72,17 @@
         {
             return $"{Byte1}:{Byte2}:{Byte3}:{Byte4}";
         }
+
+        /// <summary>
+        /// Ip address which differs number places from given ip address
+        /// </summary>
+        /// <param name="ip">ip address to change</param>
+        /// <param name="number">offset from given ip address</param>
+        /// <returns></returns>
+        public static IPAddress operator+ (IPAddress ip, uint number) 
+        {
+            return new IPAddress(ip.ToUINT32() + number);
+        }
+
     }
 }
