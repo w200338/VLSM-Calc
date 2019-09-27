@@ -1,8 +1,10 @@
-﻿namespace VLSM_Calc
+﻿using System;
+
+namespace VLSM_Calc
 {
-    public class UserRequest
+    public class UserRequest : IComparable<UserRequest>
     {
-        public int RequestedHosts { get; set; }
+        public int RequestedHosts { get; }
 
         /// <summary>
         /// Create a request
@@ -16,6 +18,12 @@
         public override string ToString()
         {
             return $"{RequestedHosts} hosts";
+        }
+
+        /// <inheritdoc />
+        public int CompareTo(UserRequest other)
+        {
+            return other.RequestedHosts.CompareTo(RequestedHosts);
         }
     }
 }

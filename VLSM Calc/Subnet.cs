@@ -22,7 +22,12 @@ namespace VLSM_Calc
         /// <summary>
         /// Subnetmask in CIDR notation (e.g. /24)
         /// </summary>
-        public int SubnetMaskCIDR { get; }
+        public int SubnetMaskCIDR {
+            get
+            {
+                return IPAddress.ToCIDR(SubnetMask);
+            }
+        }
 
         /// <summary>
         /// Network ID of this subnet
@@ -111,7 +116,7 @@ namespace VLSM_Calc
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{NetworkID} {SubnetMask} (/{SubnetMaskCIDR})";
+            return $"network ID: {new IPAddress(NetworkID)} subnet: {new IPAddress(SubnetMask)} (/{SubnetMaskCIDR})";
         }
     }
 }

@@ -65,12 +65,21 @@
         }
 
         /// <summary>
+        /// Convert to CIDR (e.g. 255.255.255.0 -> /24)
+        /// </summary>
+        /// <returns></returns>
+        public int ToCIDR()
+        {
+            return ToCIDR(this);
+        }
+
+        /// <summary>
         /// Returns a string representation of this IP address
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Byte1}:{Byte2}:{Byte3}:{Byte4}";
+            return $"{Byte1}.{Byte2}.{Byte3}.{Byte4}";
         }
 
         /// <summary>
@@ -84,5 +93,32 @@
             return new IPAddress(ip.ToUINT32() + number);
         }
 
+        /// <summary>
+        /// Convert to CIDR (e.g. 255.255.255.0 -> /24)
+        /// </summary>
+        /// <param name="ipAddress"></param>
+        /// <returns></returns>
+        public static int ToCIDR(IPAddress ipAddress)
+        {
+            return ToCIDR(ipAddress.ToUINT32());
+        }
+
+        /// <summary>
+        /// Convert to CIDR (e.g. 255.255.255.0 -> /24)
+        /// </summary>
+        /// <param name="ipAddress"></param>
+        /// <returns></returns>
+        public static int ToCIDR(uint ipAddress)
+        {
+            int output = 32;
+
+            while (ipAddress > 0)
+            {
+                ipAddress = ipAddress << 1;
+                output--;
+            }
+
+            return output;
+        }
     }
 }

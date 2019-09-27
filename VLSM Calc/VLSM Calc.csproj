@@ -58,7 +58,6 @@
     <Compile Include="IPAddress.cs" />
     <Compile Include="Subnet.cs" />
     <Compile Include="SubnetCollection.cs" />
-    <Compile Include="SubnetCreator.cs" />
     <Compile Include="UserRequest.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
