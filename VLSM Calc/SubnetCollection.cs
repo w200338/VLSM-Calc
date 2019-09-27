@@ -4,10 +4,12 @@ namespace VLSM_Calc
 {
     public class SubnetCollection
     {
+        public IPAddress NetworkID { get; set; }
+
         /// <summary>
         /// subnet which is available
         /// </summary>
-        public IPAddress Subnet { get; }
+        public IPAddress Subnet { get; set; }
 
         /// <summary>
         /// Subnetmask for own subnet

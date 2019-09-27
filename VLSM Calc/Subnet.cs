@@ -104,5 +104,14 @@ namespace VLSM_Calc
         {
             return (ip >= NetworkID && ip <= BroadcastIP);
         }
+
+        /// <summary>
+        /// String representation of subnet
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{NetworkID} {SubnetMask} (/{SubnetMaskCIDR})";
+        }
     }
 }

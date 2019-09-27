@@ -16,7 +16,8 @@
             while (!found)
             {
                 requiredBits++;
-                found = (IntPow(2, requiredBits) - 2) >= requestedHosts);
+                int newHosts = (IntPow(2, requiredBits) - 2);
+                found = (newHosts >= requestedHosts);
             }
 
             uint actualSize = (uint)IntPow(2, requiredBits);
