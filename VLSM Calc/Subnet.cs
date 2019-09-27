@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VLSM_Calc
+﻿namespace VLSM_Calc
 {
     // TODO: implement IComparable
     public class Subnet
     {
         /// <summary>
-        /// Default subnetmask of /24
+        /// Default subnet mask of /24
         /// </summary>
         private static uint DefaultSubnetMask = 0xFF_FF_FF_00;
 
@@ -20,14 +14,9 @@ namespace VLSM_Calc
         public uint SubnetMask { get; }
 
         /// <summary>
-        /// Subnetmask in CIDR notation (e.g. /24)
+        /// Subnet mask in CIDR notation (e.g. /24)
         /// </summary>
-        public int SubnetMaskCIDR {
-            get
-            {
-                return IPAddress.ToCIDR(SubnetMask);
-            }
-        }
+        public int SubnetMaskCIDR => IPAddress.ToCidr(SubnetMask);
 
         /// <summary>
         /// Network ID of this subnet
@@ -37,40 +26,17 @@ namespace VLSM_Calc
         /// <summary>
         /// Get last ip in range
         /// </summary>
-        public uint BroadcastIP
-        {
-            get
-            {
-                return NetworkID + ~SubnetMask;
-            }
-        }
+        public uint BroadcastIP => NetworkID + ~SubnetMask;
 
         /// <summary>
         /// First available ip for a host
         /// </summary>
-        public uint FirstIP
-        {
-            get
-            {
-                return NetworkID + 1;
-            }
-        }
+        public uint FirstIP => NetworkID + 1;
 
         /// <summary>
-        /// Last available ip for a host
+        /// Create a subnet with a network id and default subnet mask
         /// </summary>
-        public uint LastIP
-        {
-            get
-            {
-                return BroadcastIP - 1;
-            }
-        }
-
-        /// <summary>
-        /// Create a network with 
-        /// </summary>
-        /// <param name="networkID"></param>
+        /// <param name="networkID">Network id of subnet</param>
         public Subnet(uint networkID)
         {
             NetworkID = networkID;
@@ -78,10 +44,10 @@ namespace VLSM_Calc
         }
 
         /// <summary>
-        /// 
+        /// Create subnet with given id and subnet mask
         /// </summary>
-        /// <param name="networkID"></param>
-        /// <param name="subnetMask"></param>
+        /// <param name="networkID">Network id of subnet</param>
+        /// <param name="subnetMask">Subnet mask of subnet</param>
         public Subnet(uint networkID, uint subnetMask)
         {
             NetworkID = networkID;
@@ -95,7 +61,7 @@ namespace VLSM_Calc
         /// <returns></returns>
         public bool Contains(IPAddress ip)
         {
-            uint ipUint = ip.ToUINT32();
+            uint ipUint = ip.ToUint32();
 
             return (ipUint >= NetworkID && ipUint <= BroadcastIP);
         }

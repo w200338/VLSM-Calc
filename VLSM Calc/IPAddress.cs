@@ -8,7 +8,7 @@
         public byte Byte4 { get; set; }
 
         /// <summary>
-        /// Create ip from 4 seperate bytes
+        /// Create ip from 4 separate bytes
         /// </summary>
         /// <param name="b1">First byte</param>
         /// <param name="b2">Second byte</param>
@@ -38,18 +38,10 @@
         }
 
         /// <summary>
-        /// Creates an empty ip (0.0.0.0)
-        /// </summary>
-        public IPAddress()
-        {
-
-        }
-
-        /// <summary>
         /// Convert ip address to a 32 bit integer
         /// </summary>
         /// <returns></returns>
-        public uint ToUINT32()
+        public uint ToUint32()
         {
             uint output = 0;
 
@@ -68,9 +60,9 @@
         /// Convert to CIDR (e.g. 255.255.255.0 -> /24)
         /// </summary>
         /// <returns></returns>
-        public int ToCIDR()
+        public int ToCidr()
         {
-            return ToCIDR(this);
+            return ToCidr(this);
         }
 
         /// <summary>
@@ -90,7 +82,7 @@
         /// <returns></returns>
         public static IPAddress operator+ (IPAddress ip, uint number) 
         {
-            return new IPAddress(ip.ToUINT32() + number);
+            return new IPAddress(ip.ToUint32() + number);
         }
 
         /// <summary>
@@ -98,9 +90,9 @@
         /// </summary>
         /// <param name="ipAddress"></param>
         /// <returns></returns>
-        public static int ToCIDR(IPAddress ipAddress)
+        public static int ToCidr(IPAddress ipAddress)
         {
-            return ToCIDR(ipAddress.ToUINT32());
+            return ToCidr(ipAddress.ToUint32());
         }
 
         /// <summary>
@@ -108,7 +100,7 @@
         /// </summary>
         /// <param name="ipAddress"></param>
         /// <returns></returns>
-        public static int ToCIDR(uint ipAddress)
+        public static int ToCidr(uint ipAddress)
         {
             int output = 32;
 
@@ -126,7 +118,7 @@
         /// </summary>
         /// <param name="cidr"></param>
         /// <returns></returns>
-        public static IPAddress FromCIDR(int cidr)
+        public static IPAddress FromCidr(int cidr)
         {
             return new IPAddress(uint.MaxValue << cidr);
         }

@@ -1,18 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace VLSM_Calc
 {
@@ -102,7 +91,7 @@ namespace VLSM_Calc
                 {
                     // get value behind / and use bitwise NOT to create subnet mask
                     int subnetMask = Convert.ToInt32(subnetMaskBox.Text.Replace("/", ""));
-                    subnetCollection.SubnetMask = IPAddress.FromCIDR(subnetMask);
+                    subnetCollection.SubnetMask = IPAddress.FromCidr(subnetMask);
                 }
                 else
                 {
@@ -122,7 +111,7 @@ namespace VLSM_Calc
                     totalHosts += (uint)request.RequestedHosts;
                 }
 
-                if (totalHosts > ~subnetCollection.SubnetMask.ToUINT32())
+                if (totalHosts > ~subnetCollection.SubnetMask.ToUint32())
                 {
                     MessageBox.Show("Too many hosts requested");
                     return;

@@ -4,18 +4,18 @@ namespace VLSM_Calc
 {
     public class SubnetCollection
     {
+        /// <summary>
+        /// Network ID of network
+        /// </summary>
         public IPAddress NetworkID { get; set; }
 
-        public IPAddress BroadcastIP
-        {
-            get
-            {
-                return NetworkID + ~SubnetMask.ToUINT32();
-            }
-        }
+        /// <summary>
+        /// Broadcast ip of the entire network
+        /// </summary>
+        public IPAddress BroadcastIP => NetworkID + ~SubnetMask.ToUint32();
 
         /// <summary>
-        /// Subnetmask for own subnet
+        /// Subnet mask for entire network
         /// </summary>
         public IPAddress SubnetMask { get; set; }
 
@@ -47,7 +47,7 @@ namespace VLSM_Calc
         /// <summary>
         /// try to create a subnet
         /// </summary>
-        /// <param name="requestedHosts"></param>
+        /// <param name="requestedHosts">Amount of hosts the user requested</param>
         /// <returns></returns>
         private Subnet TryCreateSubnet(int requestedHosts)
         {
@@ -72,7 +72,7 @@ namespace VLSM_Calc
                 return null;
             }
 
-            return new Subnet(firstIp.ToUINT32(), subnetMask);
+            return new Subnet(firstIp.ToUint32(), subnetMask);
         }
 
         /// <summary>
@@ -99,30 +99,7 @@ namespace VLSM_Calc
         /// <summary>
         /// First available ip
         /// </summary>
-        /// <returns></returns>
-        public IPAddress FirstAvailableIP()
-        {
-            IPAddress output = NetworkID;
-
-            foreach (Subnet subnet in Subnets)
-            {
-                if (subnet.Contains(output))
-                {
-                    output = new IPAddress(subnet.BroadcastIP + 1);
-                }
-                else 
-                {
-                    return output;
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// First available ip
-        /// </summary>
-        /// <param name="size"></param>
+        /// <param name="size">Amount of ips that need to be available</param>
         /// <returns></returns>
         public IPAddress FirstAvailableIP(uint size)
         {
@@ -134,6 +111,7 @@ namespace VLSM_Calc
                 return output;
             }
 
+            // loop through each subnet, try to find a spot where there's no collisions
             foreach (Subnet subnet in Subnets)
             {
                 if (subnet.Contains(output))
@@ -142,7 +120,7 @@ namespace VLSM_Calc
                 }
                 else
                 {
-                    IPAddress last = new IPAddress(output.ToUINT32() + size);
+                    IPAddress last = new IPAddress(output.ToUint32() + size);
                     bool conflict = false;
 
                     foreach (Subnet otherSubnet in Subnets)
@@ -175,11 +153,16 @@ namespace VLSM_Calc
             return null;
         }
 
+        /// <summary>
+        /// Does this network contain the given ip address
+        /// </summary>
+        /// <param name="ip">ip address to check</param>
+        /// <returns></returns>
         public bool Contains(IPAddress ip)
         {
-            uint ipUint = ip.ToUINT32();
+            uint ipUint = ip.ToUint32();
 
-            return (ipUint >= NetworkID.ToUINT32() && ipUint <= BroadcastIP.ToUINT32());
+            return (ipUint >= NetworkID.ToUint32() && ipUint <= BroadcastIP.ToUint32());
         }
     }
 }

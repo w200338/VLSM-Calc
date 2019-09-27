@@ -4,6 +4,9 @@ namespace VLSM_Calc
 {
     public class UserRequest : IComparable<UserRequest>
     {
+        /// <summary>
+        /// Amount of hosts which were requested
+        /// </summary>
         public int RequestedHosts { get; }
 
         /// <summary>
@@ -17,6 +20,12 @@ namespace VLSM_Calc
 
         public override string ToString()
         {
+            // return singular 'host' if there's only requested
+            if (RequestedHosts == 1)
+            {
+                return "1 host";
+            }
+
             return $"{RequestedHosts} hosts";
         }
 
