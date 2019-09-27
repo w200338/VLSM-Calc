@@ -111,8 +111,9 @@ namespace VLSM_Calc
                     subnetCollection.SubnetMask = new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]));
                 }
                 
-                // sort requests based on the amount of hosts, highest first
+                // sort requests based on the amount of hosts, highest first and refresh the input
                 requests.Sort();
+                hostList.Items.Refresh();
 
                 // check if their total is already over the amount of hosts this setup can support
                 uint totalHosts = 0;
