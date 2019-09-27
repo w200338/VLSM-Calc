@@ -101,8 +101,8 @@ namespace VLSM_Calc
                 if (subnetMaskBox.Text.Contains("/"))
                 {
                     // get value behind / and use bitwise NOT to create subnet mask
-                    uint subnetMask = Convert.ToUInt32(subnetMaskBox.Text.Split('/')[0]);
-                    subnetCollection.SubnetMask = new IPAddress(~subnetMask);
+                    int subnetMask = Convert.ToInt32(subnetMaskBox.Text.Replace("/", ""));
+                    subnetCollection.SubnetMask = IPAddress.FromCIDR(subnetMask);
                 }
                 else
                 {
@@ -124,6 +124,7 @@ namespace VLSM_Calc
                 if (totalHosts > ~subnetCollection.SubnetMask.ToUINT32())
                 {
                     MessageBox.Show("Too many hosts requested");
+                    return;
                 }
 
                 // try to fulfill all requests

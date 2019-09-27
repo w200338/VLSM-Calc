@@ -2,10 +2,10 @@
 {
     public class IPAddress
     {
-        public byte Byte1 { get; set; } = 0;
-        public byte Byte2 { get; set; } = 0;
-        public byte Byte3 { get; set; } = 0;
-        public byte Byte4 { get; set; } = 0;
+        public byte Byte1 { get; set; }
+        public byte Byte2 { get; set; }
+        public byte Byte3 { get; set; }
+        public byte Byte4 { get; set; }
 
         /// <summary>
         /// Create ip from 4 seperate bytes
@@ -119,6 +119,16 @@
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// Convert CIDR to a subnet mask
+        /// </summary>
+        /// <param name="cidr"></param>
+        /// <returns></returns>
+        public static IPAddress FromCIDR(int cidr)
+        {
+            return new IPAddress(uint.MaxValue << cidr);
         }
     }
 }
