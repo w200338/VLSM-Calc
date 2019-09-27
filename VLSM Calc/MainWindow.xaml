@@ -7,6 +7,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="IP address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,31,0,0" Width="65" Height="28"/>
+        <TextBox Name="IPAddressBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="115,31,0,0"/>
+        <Label Content="subnet mask" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,59,0,0" Width="80" Height="23"/>
+        <TextBox Name="subnetMaskBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="115,59,0,0"/>
+        <Label Content="Hosts" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,86,0,0" Width="41" Height="23"/>
+        <TextBox Name="hostBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219" Margin="116,86,0,0"/>
+
+        <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,86,0,0" Click="addHost"/>
+        <ListBox Name="hostList" Background="LightGray" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="260" VerticalAlignment="Top" Width="219" Margin="116,133,0,0"/>
+        <ListBox Name="resultList" Background="LightGray" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="362" VerticalAlignment="Top" Width="322" Margin="425,31,0,0"/>
+        <Button Content="Calculate" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,161,0,0" Click=""/>
+        <Button Content="Remove" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,133,0,0" Click="removeHost"/>
+        <TextBlock Background="LightGreen" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Hire this now 0498 12 49 30" VerticalAlignment="Top" Margin="340,189,0,0" Height="204" Width="80"/>
     </Grid>
 </Window>
