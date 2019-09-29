@@ -48,12 +48,30 @@ namespace VLSM_Calc
                 return;
             }
 
+            // split input and turn it into an ip address
             string[] ipBytes = ipAddressBox.Text.Split('.');
             IPAddress ip = new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]));
             
-            bool output = subnet.Contains(ip);
+            // check if it's a valid host in this subnet
+            bool output = subnet.ContainsHost(ip);
 
-            hostAddressResult.Text = output ? "Yes" : "No";
+            // output depends on what the ip is exactly
+            if (output)
+            {
+                hostAddressResult.Text = "Yes";
+            }
+            else if (ip.ToUint32() == subnet.NetworkID)
+            {
+                hostAddressResult.Text = "No, this is the network ID";
+            }
+            else if (ip.ToUint32() == subnet.NetworkID)
+            {
+                hostAddressResult.Text = "No, this is the broadcast address";
+            }
+            else
+            {
+                hostAddressResult.Text = "No";
+            }
         }
     }
 }

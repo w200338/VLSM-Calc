@@ -72,13 +72,15 @@
         }
 
         /// <summary>
-        /// Check if this subnet contains this ip
+        /// Check if this subnet contains this ip for a host
         /// </summary>
-        /// <param name="ip">IP to test</param>
+        /// <param name="ipAddress">ip address to check</param>
         /// <returns></returns>
-        public bool Contains(uint ip)
+        public bool ContainsHost(IPAddress ipAddress)
         {
-            return (ip >= NetworkID && ip <= BroadcastIP);
+            uint ip = ipAddress.ToUint32();
+
+            return (ip >= FirstIP && ip <= LastIP);
         }
 
         /// <summary>
