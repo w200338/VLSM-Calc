@@ -13,12 +13,12 @@ namespace VLSM_Calc
         /// <summary>
         /// Regex to check if an ip is valid
         /// </summary>
-        private Regex ipRegex = new Regex(@"^(\d{1,3}\.){3}\d{1,3}$");
+        private static Regex ipRegex = new Regex(@"^(\d{1,3}\.){3}\d{1,3}$");
 
         /// <summary>
         /// Regex to check if a subnet mask is valid (/xx or x.x.x.x)
         /// </summary>
-        private Regex subnetMaskRegex = new Regex(@"^(((\d{1,3}\.){3}\d{1,3})|(\/?\d{1,2}))$");
+        private static Regex subnetMaskRegex = new Regex(@"^(((\d{1,3}\.){3}\d{1,3})|(\/?\d{1,2}))$");
 
         /// <summary>
         /// Calculated collection
@@ -141,6 +141,18 @@ namespace VLSM_Calc
         {
             requests.Remove((UserRequest)hostList.SelectedItem);
             hostList.Items.Refresh();
+        }
+
+        private void detailButton_Click(object sender, RoutedEventArgs e)
+        {
+            Details details = new Details(resultList.SelectedItem as Subnet);
+            details.Show();
+        }
+
+        private void resultList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Details details = new Details(resultList.SelectedItem as Subnet);
+            details.Show();
         }
     }
 }

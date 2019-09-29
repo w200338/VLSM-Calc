@@ -17,18 +17,18 @@
         <Label Content="Broadcast address:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="174,177,0,0" Width="114" Height="28"/>
         <Label Content="Available host addresses:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="174,210,0,0" Width="144" Height="28"/>
 
-        <TextBox Name="detailsNetworkAddress" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,49,0,0"/>
-        <TextBox Name="detailsFirstHost" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,82,0,0" RenderTransformOrigin="0.701,2.085"/>
-        <TextBox Name="detailsLastHost" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,115,0,0"/>
-        <TextBox Name="detailsSubnetMask" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,143,0,0"/>
-        <TextBox Name="detailsBroadcast" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,176,0,0"/>
-        <TextBox Name="detailsAvailableHosts" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,209,0,0"/>
+        <TextBox Name="detailsNetworkAddress" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,49,0,0" IsReadOnly="True"/>
+        <TextBox Name="detailsFirstHost" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,82,0,0" RenderTransformOrigin="0.701,2.085" IsReadOnly="True"/>
+        <TextBox Name="detailsLastHost" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,115,0,0" IsReadOnly="True"/>
+        <TextBox Name="detailsSubnetMask" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,143,0,0" IsReadOnly="True"/>
+        <TextBox Name="detailsBroadcast" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,176,0,0" IsReadOnly="True"/>
+        <TextBox Name="detailsAvailableHosts" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="316,209,0,0" IsReadOnly="True"/>
 
         <TextBox Name="ipAddressBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="314,300,0,0"/>
-        <Label Content="Is your IP address a host address ?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,272,0,0" Width="227" Height="28"/>
+        <Label Content="Is your IP address a host address?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,272,0,0" Width="227" Height="28"/>
         <Button x:Name="calculateButton" Content="Calculate" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="539,273,0,0" Click="calculateButton_Click"/>
         <Label Content="IP address:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,300,0,0" Width="72" Height="28"/>
-        <TextBox x:Name="ipAddressBoxCopy" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="314,328,0,0"/>
+        <TextBlock Name="hostAddressResult" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="305" Margin="314,328,0,0" Text="Invalid input"/>
         <Label Content="Result:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,328,0,0" Width="72" Height="28"/>
         <Label Content="© Jurgen Coenegrachts &amp; Jan Coomans" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="565,392,0,0" RenderTransformOrigin="0.495,-0.199"/>
     </Grid>

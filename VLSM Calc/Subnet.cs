@@ -34,6 +34,11 @@
         public uint FirstIP => NetworkID + 1;
 
         /// <summary>
+        /// Last available ip for a host
+        /// </summary>
+        public uint LastIP => BroadcastIP - 1;
+
+        /// <summary>
         /// Create a subnet with a network id and default subnet mask
         /// </summary>
         /// <param name="networkID">Network id of subnet</param>
