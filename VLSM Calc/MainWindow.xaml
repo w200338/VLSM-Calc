@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VLSM_Calc"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="452" Width="800">
     <Grid>
         <Label Content="IP address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,31,0,0" Width="65" Height="28"/>
         <TextBox Name="IPAddressBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="115,31,0,0"/>
@@ -18,7 +18,7 @@
         <ListBox Name="hostList" Background="LightGray" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="260" VerticalAlignment="Top" Width="219" Margin="116,133,0,0"/>
         <ListBox Name="resultList" Background="LightGray" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="362" VerticalAlignment="Top" Width="322" Margin="425,31,0,0" MouseDoubleClick="resultList_MouseDoubleClick"/>
         <Button Name="detailButton" Content="Details" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,189,0,0" Click="detailButton_Click"/>
-        <Label Content="© Jurgen Coenegrachts &amp; Jan Coomans" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="564,392,0,0"/>
+        <Label Content="© Jurgen Coenegrachts &amp; Jan Coomans" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="558,386,0,0"/>
         <Button x:Name="calculateButton" Content="Calculate" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,161,0,0" Click="calculateButton_Click"/>
         <Button Name="removeButton" Content="Remove" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,133,0,0" Click="removeButton_Click"/>
     </Grid>
