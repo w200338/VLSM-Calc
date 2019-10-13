@@ -100,6 +100,12 @@ namespace VLSM_Calc
                     subnetCollection.SubnetMask = new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]));
                 }
                 
+                // check if network ip and subnet combo are valid
+                if ((subnetCollection.NetworkID.ToUint32() & subnetCollection.SubnetMask.ToUint32()) != subnetCollection.NetworkID.ToUint32())
+                {
+                    throw new FormatException("Invalid IP address and subnet mask combination");
+                }
+
                 // sort requests based on the amount of hosts, highest first and refresh the input
                 requests.Sort();
                 hostList.Items.Refresh();

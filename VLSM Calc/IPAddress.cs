@@ -120,7 +120,7 @@
         /// <returns></returns>
         public static IPAddress FromCidr(int cidr)
         {
-            return new IPAddress(uint.MaxValue << cidr);
+            return new IPAddress(uint.MaxValue << (32 - cidr));
         }
     }
 }
