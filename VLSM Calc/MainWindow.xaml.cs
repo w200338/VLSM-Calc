@@ -151,6 +151,12 @@ namespace VLSM_Calc
 
         private void detailButton_Click(object sender, RoutedEventArgs e)
         {
+            // don't show details if nothing is selected
+            if (resultList.SelectedItem == null)
+            {
+                return;
+            }
+
             Details details = new Details(resultList.SelectedItem as Subnet);
             details.Show();
         }
