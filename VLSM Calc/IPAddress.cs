@@ -102,12 +102,12 @@
         /// <returns></returns>
         public static int ToCidr(uint ipAddress)
         {
-            int output = 32;
+            int output = 0;
 
             while (ipAddress > 0)
             {
                 ipAddress = ipAddress << 1;
-                output--;
+                output++;
             }
 
             return output;
