@@ -72,7 +72,11 @@ namespace VLSM_Calc
             try
             {
                 // check inputs with regex
-                if (!ipRegex.IsMatch(IPAddressBox.Text))
+                if (IPAddressBox.Text.Trim().Length == 0)
+                {
+                    IPAddressBox.Text = "0.0.0.0";
+                }
+                else if (!ipRegex.IsMatch(IPAddressBox.Text))
                 {
                     throw new FormatException("Invalid IP address");
                 }
