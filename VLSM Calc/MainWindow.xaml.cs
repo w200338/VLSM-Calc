@@ -170,5 +170,49 @@ namespace VLSM_Calc
             Details details = new Details(resultList.SelectedItem as Subnet);
             details.Show();
         }
+
+        private void splitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(splitAmountTextBox.Text, out int subnetAmount))
+            {
+                // check input
+                if (subnetAmount <= 0 || !IsPowerOfTwo(subnetAmount))
+                {
+                    MessageBox.Show("Invalid amount of subnets, must be positive and power of two");
+                }
+
+                // get network size
+                Subnet test = new Subnet();
+                uint size = test.BroadcastIP - test.NetworkID;
+
+                //requests.Add(new UserRequest())
+            }
+            else
+            {
+                MessageBox.Show("Invalid subnet amount input");
+            }
+        }
+
+        /// <summary>
+        /// Check if input is a power of two
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private bool IsPowerOfTwo(int input)
+        {
+            int amountOfOnes = 0;
+
+            while (input > 0)
+            {
+                if ((input & 0b1) == 1)
+                {
+                    amountOfOnes++;
+                }
+
+                input = input >> 1;
+            }
+
+            return amountOfOnes == 1;
+        }
     }
 }
