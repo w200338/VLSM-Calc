@@ -1,12 +1,17 @@
 # VLSM Calculator
 ## Installation instructions
- *  Find the [Setup.zip](https://gitlab.gitgudaim.com/w200338/vlsm-calc/blob/master/VLSM%20Calc%20Setup.zip) file in te repository and download it
+### Application
+ * Find the [Setup.zip](https://gitlab.gitgudaim.com/w200338/vlsm-calc/blob/master/VLSM%20Calc%20Setup.zip) file in the repository and download it
  * Extract/open the zip
  * Open Setup.exe
  * Follow the setup by clicking a combination of **install**, **next** and **finish**
  * Some anti-virus programs block or capture the program when it runs for the first time, just let it do its thing and wait a little bit
-## General instructions
+ 
+### Standalone .exe
+ * Find the [VLSM Calc.exe](https://gitlab.gitgudaim.com/w200338/vlsm-calc/blob/master/VLSM%20Calc.exe) file in the repository and download it
+ * When running it for the first time a pop-up will appear about an unknown publisher, click **More information** and then **Execute**
 
+## General instructions
 Type the address of the network you want to split (e.g. 192.168.1.0) into the first box. Then type your subnetmask in the second box, either in the same notation as the network address (e.g. 255.255.255.0) or cidr (e.g. /24).
 
 For every subnet you want to add you can type the minimum required amount in the third box and then click the add button next to it to add it to the list. To one of these requested subnets just select it in the box and click the remove button next to the list.
