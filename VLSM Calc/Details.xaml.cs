@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace VLSM_Calc
 {
@@ -37,6 +26,9 @@ namespace VLSM_Calc
             detailsSubnetMask.Text = $"{new IPAddress(subnet.SubnetMask)} (/{subnet.SubnetMaskCIDR})";
             detailsBroadcast.Text = new IPAddress(subnet.BroadcastIP).ToString();
             detailsAvailableHosts.Text = (subnet.LastIP - subnet.FirstIP + 1).ToString();
+
+            // set title
+            Title = subnet.ToString();
         }
 
         private void calculateButton_Click(object sender, RoutedEventArgs e)

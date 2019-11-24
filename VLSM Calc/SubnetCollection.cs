@@ -23,15 +23,16 @@ namespace VLSM_Calc
         /// All subnets in this collection
         /// </summary>
         public List<Subnet> Subnets { get; } = new List<Subnet>();
-        
+
         /// <summary>
         /// Try to add a subnet with at least this many hosts
         /// </summary>
         /// <param name="hostAmount"></param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        public bool AddSubnet(int hostAmount)
+        public bool AddSubnet(int hostAmount, string name)
         {
-            Subnet subnet = TryCreateSubnet(hostAmount);
+            Subnet subnet = TryCreateSubnet(hostAmount, name);
 
             if (subnet == null)
             {
@@ -48,8 +49,9 @@ namespace VLSM_Calc
         /// try to create a subnet
         /// </summary>
         /// <param name="requestedHosts">Amount of hosts the user requested</param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        private Subnet TryCreateSubnet(int requestedHosts)
+        private Subnet TryCreateSubnet(int requestedHosts, string name)
         {
             // convert requested hosts to nearest 2^n - 2 and get n
             bool found = false;
@@ -72,7 +74,7 @@ namespace VLSM_Calc
                 return null;
             }
 
-            return new Subnet(firstIp.ToUint32(), subnetMask);
+            return new Subnet(firstIp.ToUint32(), subnetMask, name);
         }
 
         /// <summary>
