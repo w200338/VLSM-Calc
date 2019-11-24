@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VLSM_Calc"
         mc:Ignorable="d"
-        Title="Details" Height="340" Width="500">
+        Title="Details" Height="400" Width="500">
     <Viewbox>
         <Grid Width="490">
             <Grid.RowDefinitions>
                 <RowDefinition Height="103*"/>
                 <RowDefinition Height="124*"/>
                 <RowDefinition Height="192*"/>
+                <RowDefinition Height="50*"/>
             </Grid.RowDefinitions>
             <Border BorderBrush="Black" Background="LightGray" BorderThickness="2" HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="490" Grid.RowSpan="2"/>
             <Border BorderBrush="Black" Background="LightGray" BorderThickness="2" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="490" Margin="0,5,0,0" Grid.Row="2"/>
@@ -37,6 +38,9 @@
             <TextBlock Name="hostAddressResult" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="305" Margin="144,66,0,0" Text="Invalid input" Grid.Row="2"/>
             <Label Content="Result:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,66,0,0" Width="72" Height="28" Grid.Row="2"/>
             <Label Content="© Jurgen Coenegrachts &amp; Jan Coomans" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="258,80,0,0" RenderTransformOrigin="0.495,-0.199" Height="25" Grid.Row="2"/>
+
+            <Button Name="PreviousSubnet" Grid.Row="3" FontSize="20" Width="50" HorizontalAlignment="Left" Margin="5, 5, 0, 0" Click="PreviousSubnet_Click">&lt;</Button>
+            <Button Name="NextSubnet" Grid.Row="3" FontSize="20" Width="50" HorizontalAlignment="Right" Margin="0, 5, 5, 0" Click="NextSubnet_Click">&gt;</Button>
         </Grid>
     </Viewbox>
 </Window>
