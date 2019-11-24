@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>FE3D13082AFC3DE1CF740262BAC54518C62FD0AC</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2B6F34C2B590D4F5D48990B4658B05EA818E34F0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>VLSM Calc_TemporaryKey.pfx</ManifestKeyFile>
