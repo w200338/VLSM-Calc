@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Linq;
 
 namespace VLSM_Calc
 {
@@ -28,13 +30,20 @@ namespace VLSM_Calc
         /// <summary>
         /// User requests
         /// </summary>
-        private List<UserRequest> requests = new List<UserRequest>();
+        private ObservableCollection<UserRequest> requests = new ObservableCollection<UserRequest>();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            hostList.ItemsSource = requests;
         }
 
+        /// <summary>
+        /// Add a new user request
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -48,16 +57,39 @@ namespace VLSM_Calc
 
                 UserRequest request = new UserRequest(requestedNumber);
                 requests.Add(request);
-
-                hostList.ItemsSource = requests;
-                hostList.Items.Refresh();
             }
             catch (FormatException)
             {
-                MessageBox.Show("Ongeldig aantal hosts");
+                MessageBox.Show("Invalid amount of hosts");
             }
         }
 
+        /// <summary>
+        /// Remove a certain request
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void removeButton_Click(object sender, RoutedEventArgs e)
+        {
+            requests.Remove((UserRequest)hostList.SelectedItem);
+        }
+
+        /// <summary>
+        /// Open UserRequestWindow to change this request
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void hostList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            UserRequestWindow window = new UserRequestWindow(this, (UserRequest)hostList.SelectedItem);
+            window.Show();
+        }
+
+        /// <summary>
+        /// Calculate subnets
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calculateButton_Click(object sender, RoutedEventArgs e)
         {
             // don't do a thing if there's no requests
@@ -111,8 +143,9 @@ namespace VLSM_Calc
                 }
 
                 // sort requests based on the amount of hosts, highest first and refresh the input
-                requests.Sort();
-                hostList.Items.Refresh();
+                List<UserRequest> tempList = new List<UserRequest>(requests);
+                tempList.Sort();
+                requests = new ObservableCollection<UserRequest>(tempList);
 
                 // check if their total is already over the amount of hosts this setup can support
                 uint totalHosts = 0;
@@ -131,7 +164,7 @@ namespace VLSM_Calc
                 foreach (UserRequest request in requests)
                 {
                     // if a subnet can't be added
-                    if (!subnetCollection.AddSubnet(request.RequestedHosts))
+                    if (!subnetCollection.AddSubnet(request.RequestedHosts, request.Name))
                     {
                         MessageBox.Show("Invalid combination of hosts");
                         return;
@@ -146,13 +179,12 @@ namespace VLSM_Calc
             resultList.ItemsSource = subnetCollection.Subnets;
             resultList.Items.Refresh();
         }
-
-        private void removeButton_Click(object sender, RoutedEventArgs e)
-        {
-            requests.Remove((UserRequest)hostList.SelectedItem);
-            hostList.Items.Refresh();
-        }
-
+        
+        /// <summary>
+        /// Shows detail window of selected subnet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void detailButton_Click(object sender, RoutedEventArgs e)
         {
             // don't show details if nothing is selected
@@ -165,6 +197,11 @@ namespace VLSM_Calc
             details.Show();
         }
 
+        /// <summary>
+        /// Open Details Window of selected subnet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void resultList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Details details = new Details(resultList.SelectedItem as Subnet);

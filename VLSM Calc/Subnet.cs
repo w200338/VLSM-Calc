@@ -9,6 +9,11 @@
         private static uint DefaultSubnetMask = 0xFF_FF_FF_00;
 
         /// <summary>
+        /// User given name of the subnet
+        /// </summary>
+        public string Name { get; } = null;
+
+        /// <summary>
         /// Subnet mask for this subnet
         /// </summary>
         public uint SubnetMask { get; }
@@ -53,10 +58,12 @@
         /// </summary>
         /// <param name="networkID">Network id of subnet</param>
         /// <param name="subnetMask">Subnet mask of subnet</param>
-        public Subnet(uint networkID, uint subnetMask)
+        /// <param name="name">name of the subnet</param>
+        public Subnet(uint networkID, uint subnetMask, string name = null)
         {
             NetworkID = networkID;
             SubnetMask = subnetMask;
+            Name = name;
         }
 
         /// <summary>
@@ -89,6 +96,12 @@
         /// <returns></returns>
         public override string ToString()
         {
+            // if user gave subnet a name
+            if (!string.IsNullOrEmpty(Name))
+            {
+                return $"{Name} ({new IPAddress(NetworkID)} /{SubnetMaskCIDR})";
+            }
+
             return $"network ID: {new IPAddress(NetworkID)} subnet: {new IPAddress(SubnetMask)} (/{SubnetMaskCIDR})";
         }
     }

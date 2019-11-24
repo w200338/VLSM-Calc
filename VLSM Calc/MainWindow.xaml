@@ -15,7 +15,7 @@
         <TextBox Name="hostBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219" Margin="116,86,0,0"/>
 
         <Button Name="addButton" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,86,0,0" Click="AddButton_Click"/>
-        <ListBox Name="hostList" Background="LightGray" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="260" VerticalAlignment="Top" Width="219" Margin="116,133,0,0"/>
+        <ListBox Name="hostList" Background="LightGray" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="260" VerticalAlignment="Top" Width="219" Margin="116,133,0,0" MouseDoubleClick="hostList_MouseDoubleClick"/>
         <ListBox Name="resultList" Background="LightGray" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="362" VerticalAlignment="Top" Width="322" Margin="425,31,0,0" MouseDoubleClick="resultList_MouseDoubleClick"/>
         <Button Name="detailButton" Content="Details" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,189,0,0" Click="detailButton_Click"/>
         <Label Content="© Jurgen Coenegrachts &amp; Jan Coomans" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="558,386,0,0"/>

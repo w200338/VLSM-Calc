@@ -1,0 +1,19 @@
+﻿<Window x:Class="VLSM_Calc.UserRequestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VLSM_Calc"
+        mc:Ignorable="d"
+        Title="Request" Height="110" Width="230">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5, 10, 0, 5">
+            <TextBlock Width="50">Name</TextBlock>
+            <TextBox Name="NameInput" Width="150" Text="{Binding Name}"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5, 10, 0, 5">
+            <TextBlock Width="50">Hosts</TextBlock>
+            <TextBox Name="HostInput" Width="150" Text="{Binding RequestedHosts}"></TextBox>
+        </StackPanel>
+    </StackPanel>
+</Window>
