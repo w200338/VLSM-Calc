@@ -11,24 +11,51 @@ namespace VLSM_Calc
     {
         private static Regex ipRegex = new Regex(@"^(\d{1,3}\.){3}\d{1,3}$");
 
+        /// <summary>
+        /// Currently selected subnet
+        /// </summary>
         private Subnet subnet;
 
-        public Details(Subnet subnet)
+        /// <summary>
+        /// Index of subnet
+        /// </summary>
+        private int index = 0;
+
+        /// <summary>
+        /// reference to MainWindow
+        /// </summary>
+        private MainWindow mainWindow;
+
+        public Details(MainWindow mainWindow, Subnet subnet, int subnetIndex)
         {
             InitializeComponent();
 
-            this.subnet = subnet;
+            this.mainWindow = mainWindow;
+            index = subnetIndex;
+
+            UpdateSubnet(subnet);
+
+            UpdateNextAndPreviousButtons();
+        }
+
+        /// <summary>
+        /// Put text into textboxes
+        /// </summary>
+        private void UpdateSubnet(Subnet newSubnet)
+        {
+            // change subnet
+            subnet = newSubnet;
 
             // populate boxes
-            detailsNetworkAddress.Text = new IPAddress(subnet.NetworkID).ToString();
-            detailsFirstHost.Text = new IPAddress(subnet.FirstIP).ToString();
-            detailsLastHost.Text = new IPAddress(subnet.LastIP).ToString();
-            detailsSubnetMask.Text = $"{new IPAddress(subnet.SubnetMask)} (/{subnet.SubnetMaskCIDR})";
-            detailsBroadcast.Text = new IPAddress(subnet.BroadcastIP).ToString();
-            detailsAvailableHosts.Text = (subnet.LastIP - subnet.FirstIP + 1).ToString();
+            detailsNetworkAddress.Text = new IPAddress(newSubnet.NetworkID).ToString();
+            detailsFirstHost.Text = new IPAddress(newSubnet.FirstIP).ToString();
+            detailsLastHost.Text = new IPAddress(newSubnet.LastIP).ToString();
+            detailsSubnetMask.Text = $"{new IPAddress(newSubnet.SubnetMask)} (/{newSubnet.SubnetMaskCIDR})";
+            detailsBroadcast.Text = new IPAddress(newSubnet.BroadcastIP).ToString();
+            detailsAvailableHosts.Text = (newSubnet.LastIP - newSubnet.FirstIP + 1).ToString();
 
             // set title
-            Title = subnet.ToString();
+            Title = newSubnet.ToString();
         }
 
         private void calculateButton_Click(object sender, RoutedEventArgs e)
@@ -64,6 +91,43 @@ namespace VLSM_Calc
             {
                 hostAddressResult.Text = "No";
             }
+        }
+
+        /// <summary>
+        /// Select previous subnet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PreviousSubnet_Click(object sender, RoutedEventArgs e)
+        {
+            index--;
+
+            UpdateSubnet((Subnet) mainWindow.resultList.Items[index]);
+
+            UpdateNextAndPreviousButtons();
+        }
+
+        /// <summary>
+        /// Select next subnet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NextSubnet_Click(object sender, RoutedEventArgs e)
+        {
+            index++;
+
+            UpdateSubnet((Subnet)mainWindow.resultList.Items[index]);
+
+            UpdateNextAndPreviousButtons();
+        }
+
+        /// <summary>
+        /// Update IsEnabled property of next and previous buttons based on the index of selected subnet
+        /// </summary>
+        private void UpdateNextAndPreviousButtons()
+        {
+            PreviousSubnet.IsEnabled = index > 0;
+            NextSubnet.IsEnabled = index < mainWindow.resultList.Items.Count - 1;
         }
     }
 }

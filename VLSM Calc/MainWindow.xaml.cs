@@ -193,7 +193,7 @@ namespace VLSM_Calc
                 return;
             }
 
-            Details details = new Details(resultList.SelectedItem as Subnet);
+            Details details = new Details(this, resultList.SelectedItem as Subnet, resultList.SelectedIndex);
             details.Show();
         }
 
@@ -204,7 +204,7 @@ namespace VLSM_Calc
         /// <param name="e"></param>
         private void resultList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Details details = new Details(resultList.SelectedItem as Subnet);
+            Details details = new Details(this, resultList.SelectedItem as Subnet, resultList.SelectedIndex);
             details.Show();
         }
     }
