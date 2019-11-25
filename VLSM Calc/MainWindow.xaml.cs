@@ -65,13 +65,16 @@ namespace VLSM_Calc
         }
 
         /// <summary>
-        /// Remove a certain request
+        /// Remove selected request
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void removeButton_Click(object sender, RoutedEventArgs e)
         {
-            requests.Remove((UserRequest)hostList.SelectedItem);
+            if (hostList.SelectedIndex >= 0 && hostList.SelectedIndex < requests.Count)
+            {
+                requests.RemoveAt(hostList.SelectedIndex);
+            }
         }
 
         /// <summary>
