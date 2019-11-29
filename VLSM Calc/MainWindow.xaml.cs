@@ -15,12 +15,17 @@ namespace VLSM_Calc
         /// <summary>
         /// Regex to check if an ip is valid
         /// </summary>
-        private static Regex ipRegex = new Regex(@"^(\d{1,3}\.){3}\d{1,3}$");
+        public static Regex ipRegex = new Regex(@"^(\d{1,3}\.){3}\d{1,3}$");
 
         /// <summary>
         /// Regex to check if a subnet mask is valid (/xx or x.x.x.x)
         /// </summary>
-        private static Regex subnetMaskRegex = new Regex(@"^(((\d{1,3}\.){3}\d{1,3})|(\/?\d{1,2}))$");
+        public static Regex subnetMaskRegex = new Regex(@"^(((\d{1,3}\.){3}\d{1,3})|(\/?\d{1,2}))$");
+
+        /// <summary>
+        /// Regex to check if string is just a number
+        /// </summary>
+        public static Regex numberRegex = new Regex("^\\d+$");
 
         /// <summary>
         /// Calculated collection
@@ -250,7 +255,7 @@ namespace VLSM_Calc
         private void DivideButton_Click(object sender, RoutedEventArgs e)
         {
             // check input
-            Regex numberRegex = new Regex("^\\d+$");
+            
 
             if (!numberRegex.IsMatch(hostBox.Text.Trim()))
             {
@@ -298,6 +303,17 @@ namespace VLSM_Calc
             {
                 requests.Add(new UserRequest(amountOfHosts));
             }
+        }
+
+        /// <summary>
+        /// Open subnet size calculator
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SubnetSizeCalculatorButton_Click(object sender, RoutedEventArgs e)
+        {
+            SubnetConverter subnetConverter = new SubnetConverter();
+            subnetConverter.Show();
         }
     }
 }

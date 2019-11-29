@@ -1,4 +1,6 @@
-﻿namespace VLSM_Calc
+﻿using System;
+
+namespace VLSM_Calc
 {
     public class IPAddress
     {
@@ -102,6 +104,18 @@
         /// <returns></returns>
         public static int ToCidr(uint ipAddress)
         {
+            // check if there's just one continuous line of 1's
+            int testLength = 0;
+            while (((ipAddress << testLength >> 31) & 0b1) == 1)
+            {
+                testLength++;
+            }
+
+            if (ipAddress << testLength > 0)
+            {
+                throw new FormatException("Invalid subnet mask");
+            }
+
             int output = 0;
 
             while (ipAddress > 0)
@@ -120,6 +134,23 @@
         /// <returns></returns>
         public static IPAddress FromCidr(int cidr)
         {
+            // check input
+            if (cidr < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(cidr), "CIDR number can't be negative");
+            }
+
+            if (cidr > 32)
+            {
+                throw new ArgumentOutOfRangeException(nameof(cidr), "CIDR number is too big");
+            }
+
+            // prevent overflow error
+            if (cidr == 0)
+            {
+                return new IPAddress(0);
+            }
+
             return new IPAddress(uint.MaxValue << (32 - cidr));
         }
     }
