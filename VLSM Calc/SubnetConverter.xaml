@@ -1,0 +1,22 @@
+﻿<Window x:Class="VLSM_Calc.SubnetConverter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VLSM_Calc"
+        mc:Ignorable="d"
+        Title="Subnet converter" Height="90" Width="300"
+        ResizeMode="CanMinimize">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="CIDR number" Margin="5, 5, 2, 2" Width="100" TextAlignment="Right"/>
+            <TextBox Name="SubnetCIDR" Text="24" Width="70" Margin="2"/>
+            <Button Name="SubnetCIDRButton" Margin="52, 2, 2, 2" Click="SubnetConvert_Click">Convert</Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Subnet mask" Margin="5, 5, 2, 2" Width="100" TextAlignment="Right"/>
+            <TextBox Name="SubnetMaskInput" Text="255.255.255.0" Width="120" Margin="2"/>
+            <Button Name="SubnetMaskButton" Margin="2" Click="SubnetConvert_Click">Convert</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

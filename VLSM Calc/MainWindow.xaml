@@ -14,7 +14,7 @@
                     <MenuItem Name="SubnetSwitch" Header="Subnet" IsCheckable="True" IsChecked="False" Click="SubnetSwitch_Click" />
                 </MenuItem>
                 <MenuItem Header="Tools">
-                    <MenuItem Header="Subnet size calculator"></MenuItem>
+                    <MenuItem Name="SubnetSizeCalculatorButton" Header="Subnet size calculator" Click="SubnetSizeCalculatorButton_Click"></MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>
