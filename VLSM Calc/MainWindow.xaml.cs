@@ -149,6 +149,7 @@ namespace VLSM_Calc
                 List<UserRequest> tempList = new List<UserRequest>(requests);
                 tempList.Sort();
                 requests = new ObservableCollection<UserRequest>(tempList);
+                hostList.DataContext = requests;
 
                 // check if their total is already over the amount of hosts this setup can support
                 uint totalHosts = 0;
