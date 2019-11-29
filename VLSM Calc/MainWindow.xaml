@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VLSM_Calc"
         mc:Ignorable="d"
-        Title="VLSM Calculator" Height="452" Width="800">
+        Title="VLSM Calculator - VLSM mode" Height="470" Width="800">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <Menu>
                 <MenuItem Header="Mode">
-                    <MenuItem Name="VLSMSwitch" Header="VLSM" IsCheckable="True" IsChecked="True" Click="VLSMSwitch_Click" />
-                    <MenuItem Name="SubnetSwitch" Header="Subnet" IsCheckable="True" IsChecked="False" Click="SubnetSwitch_Click" />
+                    <MenuItem Name="VLSMSwitch" Header="VLSM" IsChecked="True" Click="VLSMSwitch_Click" />
+                    <MenuItem Name="SubnetSwitch" Header="Subnet" IsChecked="False" Click="SubnetSwitch_Click" />
                 </MenuItem>
                 <MenuItem Header="Tools">
                     <MenuItem Name="SubnetSizeCalculatorButton" Header="Subnet size calculator" Click="SubnetSizeCalculatorButton_Click"></MenuItem>
@@ -20,12 +20,12 @@
         </DockPanel>
         <DockPanel>
             <Grid>
-                <Label Content="IP address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,31,0,0" Width="65" Height="28"/>
+                <TextBlock Text="IP address" TextAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,31,0,0" Width="75" Height="23"/>
                 <TextBox Name="IPAddressBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="115,31,0,0"/>
-                <Label Content="subnet mask" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,59,0,0" Width="80" Height="23"/>
+                <TextBlock Text="subnet mask" TextAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,59,0,0" Width="75" Height="23"/>
                 <TextBox Name="subnetMaskBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="115,59,0,0"/>
-                <Label Name="HostLabel" Content="Hosts" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,86,0,0" Width="41" Height="23"/>
-                <TextBox Name="hostBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219" Margin="116,86,0,0"/>
+                <TextBlock Name="HostLabel" TextAlignment="Right" Text="Hosts" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,87,0,0" Width="75" Height="22"/>
+                <TextBox Name="hostBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" Margin="115,86,0,0"/>
 
                 <Button Name="addButton" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,86,0,0" Click="AddButton_Click"/>
                 <Button Name="DivideButton" Visibility="Hidden" IsEnabled="false" Content="Divide" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="23" Margin="340,86,0,0" Click="DivideButton_Click"/>

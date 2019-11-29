@@ -155,6 +155,7 @@ namespace VLSM_Calc
                 tempList.Sort();
                 requests = new ObservableCollection<UserRequest>(tempList);
                 hostList.DataContext = requests;
+                hostList.ItemsSource = requests;
 
                 // check if their total is already over the amount of hosts this setup can support
                 uint totalHosts = 0;
@@ -226,10 +227,14 @@ namespace VLSM_Calc
         {
             removeButton.IsEnabled = true;
             addButton.IsEnabled = true;
-            HostLabel.Content = "Hosts";
-
+            HostLabel.Text = "Hosts";
+            
             DivideButton.IsEnabled = false;
             DivideButton.Visibility = Visibility.Hidden;
+
+            VLSMSwitch.IsChecked = true;
+            SubnetSwitch.IsChecked = false;
+            Title = "VLSM Calculator - VLSM mode";
         }
 
         /// <summary>
@@ -241,10 +246,14 @@ namespace VLSM_Calc
         {
             removeButton.IsEnabled = false;
             addButton.IsEnabled = false;
-            HostLabel.Content = "Subnets";
+            HostLabel.Text = "Subnets";
 
             DivideButton.IsEnabled = true;
             DivideButton.Visibility = Visibility.Visible;
+
+            VLSMSwitch.IsChecked = false;
+            SubnetSwitch.IsChecked = true;
+            Title = "VLSM Calculator - Subnet mode";
         }
 
         /// <summary>
@@ -255,8 +264,6 @@ namespace VLSM_Calc
         private void DivideButton_Click(object sender, RoutedEventArgs e)
         {
             // check input
-            
-
             if (!numberRegex.IsMatch(hostBox.Text.Trim()))
             {
                 MessageBox.Show("Invalid number of subnets");
