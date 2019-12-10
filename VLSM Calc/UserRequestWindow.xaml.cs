@@ -21,6 +21,9 @@ namespace VLSM_Calc
             // set datacontext of window
             DataContext = request;
 
+            // only VLSM can have resizeable subnet sizes
+            HostInput.IsEnabled = (mainWindow.CalculatorMode == CalculatorMode.VLSM);
+
             Closed += UserRequestWindow_Closed;
         }
 

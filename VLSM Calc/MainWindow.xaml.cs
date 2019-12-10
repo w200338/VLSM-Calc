@@ -37,6 +37,11 @@ namespace VLSM_Calc
         /// </summary>
         private ObservableCollection<UserRequest> requests = new ObservableCollection<UserRequest>();
 
+        /// <summary>
+        /// Current calculator mode
+        /// </summary>
+        public CalculatorMode CalculatorMode { get; private set; } = CalculatorMode.VLSM;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -235,6 +240,8 @@ namespace VLSM_Calc
             VLSMSwitch.IsChecked = true;
             SubnetSwitch.IsChecked = false;
             Title = "VLSM Calculator - VLSM mode";
+
+            CalculatorMode = CalculatorMode.VLSM;
         }
 
         /// <summary>
@@ -254,6 +261,8 @@ namespace VLSM_Calc
             VLSMSwitch.IsChecked = false;
             SubnetSwitch.IsChecked = true;
             Title = "VLSM Calculator - Subnet mode";
+
+            CalculatorMode = CalculatorMode.Subnet;
         }
 
         /// <summary>
@@ -322,5 +331,14 @@ namespace VLSM_Calc
             SubnetConverter subnetConverter = new SubnetConverter();
             subnetConverter.Show();
         }
+    }
+
+    /// <summary>
+    /// Modes which the calcutor can use
+    /// </summary>
+    public enum CalculatorMode
+    {
+        Subnet,
+        VLSM
     }
 }
