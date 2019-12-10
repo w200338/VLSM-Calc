@@ -334,7 +334,7 @@ namespace VLSM_Calc
     }
 
     /// <summary>
-    /// Modes which the calcutor can use
+    /// Modes which the calculator can use
     /// </summary>
     public enum CalculatorMode
     {

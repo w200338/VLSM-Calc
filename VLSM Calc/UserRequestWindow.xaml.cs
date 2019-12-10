@@ -25,6 +25,20 @@ namespace VLSM_Calc
             HostInput.IsEnabled = (mainWindow.CalculatorMode == CalculatorMode.VLSM);
 
             Closed += UserRequestWindow_Closed;
+            KeyDown += UserRequestWindow_KeyDown;
+        }
+
+        /// <summary>
+        /// Close window when enter is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UserRequestWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter || e.Key == System.Windows.Input.Key.Return)
+            {
+                Close();
+            }
         }
 
         /// <summary>
