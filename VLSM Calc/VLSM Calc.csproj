@@ -90,24 +90,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Details.xaml.cs">
+    <Compile Include="Windows\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
     <Compile Include="IPAddress.cs" />
     <Compile Include="Subnet.cs" />
     <Compile Include="SubnetCollection.cs" />
-    <Compile Include="SubnetConverter.xaml.cs">
+    <Compile Include="ToolWindows\SubnetConverter.xaml.cs">
       <DependentUpon>SubnetConverter.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserRequest.cs" />
-    <Compile Include="UserRequestWindow.xaml.cs">
+    <Compile Include="Windows\UserRequestWindow.xaml.cs">
       <DependentUpon>UserRequestWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Details.xaml">
+    <Page Include="Windows\Details.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -115,15 +115,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SubnetConverter.xaml">
+    <Page Include="ToolWindows\SubnetConverter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserRequestWindow.xaml">
+    <Page Include="Windows\UserRequestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,5 +167,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
