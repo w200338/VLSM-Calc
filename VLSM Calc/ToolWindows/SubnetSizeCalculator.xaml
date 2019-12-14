@@ -1,0 +1,24 @@
+﻿<Window x:Class="VLSM_Calc.ToolWindows.SubnetSizeCalculator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VLSM_Calc.ToolWindows"
+        mc:Ignorable="d"
+        Title="Subnet size calculator" Height="120" Width="300">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Subnet mask" Margin="5, 5, 2, 2" Width="100" TextAlignment="Right"/>
+            <TextBox Name="SubnetInput" Text="255.255.255.0" Width="120" Margin="2"/>
+            <Button Name="SubnetButton" Margin="2, 2, 2, 2" Click="SubnetButton_Click">Convert</Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Total size" Margin="5, 5, 2, 2" Width="100" TextAlignment="Right"/>
+            <TextBox Name="SizeOutput" Text="256" Width="120" Margin="2"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Amount of hosts" Margin="5, 5, 2, 2" Width="100" TextAlignment="Right"/>
+            <TextBox Name="HostSizeOutput" Text="254" Width="120" Margin="2" IsReadOnly="True"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
