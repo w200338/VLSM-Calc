@@ -90,6 +90,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ToolWindows\SubnetSizeCalculator.xaml.cs">
+      <DependentUpon>SubnetSizeCalculator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
     <Compile Include="Windows\UserRequestWindow.xaml.cs">
       <DependentUpon>UserRequestWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="ToolWindows\SubnetSizeCalculator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Details.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
