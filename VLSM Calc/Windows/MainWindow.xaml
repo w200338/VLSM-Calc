@@ -16,6 +16,7 @@
                 <MenuItem Header="Tools">
                     <MenuItem Name="SubnetSizeConverterButton" Header="Subnet converter" Click="SubnetSizeConverterButton_Click"></MenuItem>
                     <MenuItem Name="SubnetSizeCalculatorButton" Header="Subnet size calculator" Click="SubnetSizeCalculatorButton_Click"></MenuItem>
+                    <MenuItem Name="SubnetWildcardCalculatorButton" Header="Wildcard calculator" Click="SubnetWildcardCalculatorButton_Click"></MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>

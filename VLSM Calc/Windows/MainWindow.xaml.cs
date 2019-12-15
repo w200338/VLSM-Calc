@@ -21,7 +21,7 @@ namespace VLSM_Calc
         /// <summary>
         /// Regex to check if a subnet mask is valid (/xx or x.x.x.x)
         /// </summary>
-        public static Regex subnetMaskRegex = new Regex(@"^(((\d{1,3}\.){3}\d{1,3})|(\/?\d{1,2}))$");
+        public static Regex subnetMaskRegex = new Regex(@"^(((\d{1,3}\.){3}\d{1,3})|(\/\d{1,2}))$");
 
         /// <summary>
         /// Regex to check if string is just a number
@@ -342,6 +342,17 @@ namespace VLSM_Calc
         {
             SubnetConverter subnetConverter = new SubnetConverter();
             subnetConverter.Show();
+        }
+
+        /// <summary>
+        /// Open subnet to wildcard converter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SubnetWildcardCalculatorButton_Click(object sender, RoutedEventArgs e)
+        {
+            SubnetWildCardConverter subnetWildCardConverter = new SubnetWildCardConverter();
+            subnetWildCardConverter.Show();
         }
     }
 
