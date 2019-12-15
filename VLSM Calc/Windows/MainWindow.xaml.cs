@@ -343,6 +343,17 @@ namespace VLSM_Calc
             SubnetConverter subnetConverter = new SubnetConverter();
             subnetConverter.Show();
         }
+
+        /// <summary>
+        /// Open subnet to wildcard converter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SubnetWildcardCalculatorButton_Click(object sender, RoutedEventArgs e)
+        {
+            SubnetWildCardConverter subnetWildCardConverter = new SubnetWildCardConverter();
+            subnetWildCardConverter.Show();
+        }
     }
 
     /// <summary>
