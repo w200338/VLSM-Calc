@@ -40,6 +40,9 @@ namespace VLSM_Calc.ToolWindows
                         // split into 4 parts and make into an ip address
                         string[] ipBytes = SubnetInput.Text.Split('.');
                         subnetMask = new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]));
+
+                        // check if valid subnet mask
+                        subnetMask.ToCidr();
                     }
                     catch (FormatException exception)
                     {
