@@ -21,7 +21,7 @@ namespace VLSM_Calc
         /// <summary>
         /// Regex to check if a subnet mask is valid (/xx or x.x.x.x)
         /// </summary>
-        public static Regex subnetMaskRegex = new Regex(@"^(((\d{1,3}\.){3}\d{1,3})|(\/?\d{1,2}))$");
+        public static Regex subnetMaskRegex = new Regex(@"^(((\d{1,3}\.){3}\d{1,3})|(\/\d{1,2}))$");
 
         /// <summary>
         /// Regex to check if string is just a number
