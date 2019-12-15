@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Linq;
+using VLSM_Calc.ToolWindows;
 
 namespace VLSM_Calc
 {
@@ -327,6 +328,17 @@ namespace VLSM_Calc
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SubnetSizeCalculatorButton_Click(object sender, RoutedEventArgs e)
+        {
+            SubnetSizeCalculator subnetSize = new SubnetSizeCalculator();
+            subnetSize.Show();
+        }
+
+        /// <summary>
+        /// Open subnet size converter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SubnetSizeConverterButton_Click(object sender, RoutedEventArgs e)
         {
             SubnetConverter subnetConverter = new SubnetConverter();
             subnetConverter.Show();
