@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InputParser.cs" />
     <Compile Include="ToolWindows\SubnetSizeCalculator.xaml.cs">
       <DependentUpon>SubnetSizeCalculator.xaml</DependentUpon>
     </Compile>

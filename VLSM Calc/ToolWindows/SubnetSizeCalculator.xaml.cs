@@ -15,58 +15,26 @@ namespace VLSM_Calc.ToolWindows
 
         private void SubnetButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.subnetMaskRegex.IsMatch(SubnetInput.Text))
+            try
             {
-                // get subnet mask
-                IPAddress subnetMask;
-                if (SubnetInput.Text.Contains("/"))
+                if (InputParser.TryParseSubnetMask(SubnetInput.Text.Trim(), out IPAddress subnetMask, out string errorMessage))
                 {
-                    // get value behind / and use bitwise NOT to create subnet mask
-                    int subnetMaskCidr = Convert.ToInt32(SubnetInput.Text.Replace("/", ""));
+                    // get size
+                    Subnet subnet = new Subnet(0, subnetMask.ToUint32());
+                    long size = 1L + subnet.BroadcastIP - subnet.NetworkID;
 
-                    // check if number is valid
-                    if (subnetMaskCidr > 31 || subnetMaskCidr < 0)
-                    {
-                        MessageBox.Show("Subnet cidr number must be between 0 and 31");
-                        return;
-                    }
-
-                    subnetMask = IPAddress.FromCidr(subnetMaskCidr);
+                    // put into output boxes
+                    SizeOutput.Text = size.ToString();
+                    HostSizeOutput.Text = (size - 2).ToString();
                 }
                 else
                 {
-                    try
-                    {
-                        // split into 4 parts and make into an ip address
-                        string[] ipBytes = SubnetInput.Text.Split('.');
-                        subnetMask = new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]));
-
-                        // check if valid subnet mask
-                        subnetMask.ToCidr();
-                    }
-                    catch (FormatException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
-                    catch (OverflowException)
-                    {
-                        MessageBox.Show("Subnet mask contains a value which is too large");
-                        return;
-                    }
+                    throw new FormatException(errorMessage);
                 }
-
-                // get size
-                Subnet subnet = new Subnet(0, subnetMask.ToUint32());
-                long size = subnet.BroadcastIP - subnet.NetworkID + 1L;
-
-                // put into output boxes
-                SizeOutput.Text = size.ToString();
-                HostSizeOutput.Text = (size - 2).ToString();
             }
-            else
+            catch (FormatException exception)
             {
-                MessageBox.Show("Invalid subnet format");
+                MessageBox.Show(exception.Message);
             }
         }
     }
