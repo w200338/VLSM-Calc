@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace VLSM_Calc
+namespace VLSM_Calc.Windows
 {
     /// <summary>
     /// Interaction logic for UserRequestWindow.xaml

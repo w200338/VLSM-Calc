@@ -1,8 +1,7 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 
-namespace VLSM_Calc
+namespace VLSM_Calc.Windows
 {
     /// <summary>
     /// Interaction logic for Details.xaml
@@ -60,17 +59,13 @@ namespace VLSM_Calc
 
         private void calculateButton_Click(object sender, RoutedEventArgs e)
         {
-            // check inputs with regex
-            if (!ipRegex.IsMatch(ipAddressBox.Text))
+            // try to parse user input
+            if (!InputParser.TryParseIPAddress(ipAddressBox.Text.Trim(), out IPAddress ip, out string errorMessage))
             {
-                hostAddressResult.Text = "Invalid input format";
+                MessageBox.Show(errorMessage);
                 return;
             }
 
-            // split input and turn it into an ip address
-            string[] ipBytes = ipAddressBox.Text.Split('.');
-            IPAddress ip = new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]));
-            
             // check if it's a valid host in this subnet
             bool output = subnet.ContainsHost(ip);
 
@@ -83,7 +78,7 @@ namespace VLSM_Calc
             {
                 hostAddressResult.Text = "No, this is the network ID";
             }
-            else if (ip.ToUint32() == subnet.NetworkID)
+            else if (ip.ToUint32() == subnet.BroadcastIP)
             {
                 hostAddressResult.Text = "No, this is the broadcast address";
             }

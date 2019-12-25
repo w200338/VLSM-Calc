@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Linq;
 using VLSM_Calc.ToolWindows;
 
-namespace VLSM_Calc
+namespace VLSM_Calc.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -117,39 +116,26 @@ namespace VLSM_Calc
             
             try
             {
-                // check inputs with regex
-                if (IPAddressBox.Text.Trim().Length == 0)
+                // ip address
+                if (InputParser.TryParseIPAddress(IPAddressBox.Text.Trim(), out IPAddress iPAddress, out string errorMessage))
                 {
-                    IPAddressBox.Text = "0.0.0.0";
-                }
-                else if (!ipRegex.IsMatch(IPAddressBox.Text))
-                {
-                    throw new FormatException("Invalid IP address");
-                }
-
-                if (!subnetMaskRegex.IsMatch(subnetMaskBox.Text))
-                {
-                    throw new FormatException("Invalid subnet mask");
-                }
-
-                // get ip from input
-                string[] ipBytes = IPAddressBox.Text.Split('.');
-                subnetCollection.NetworkID = new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]));
-
-                // get subnet mask
-                if (subnetMaskBox.Text.Contains("/"))
-                {
-                    // get value behind / and use bitwise NOT to create subnet mask
-                    int subnetMask = Convert.ToInt32(subnetMaskBox.Text.Replace("/", ""));
-                    subnetCollection.SubnetMask = IPAddress.FromCidr(subnetMask);
+                    subnetCollection.NetworkID = iPAddress;
                 }
                 else
                 {
-                    // split into 4 parts
-                    ipBytes = subnetMaskBox.Text.Split('.');
-                    subnetCollection.SubnetMask = new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]));
+                    throw new Exception(errorMessage);
                 }
-                
+
+                // subnet mask
+                if (InputParser.TryParseSubnetMask(subnetMaskBox.Text, out IPAddress subnetMask, out errorMessage))
+                {
+                    subnetCollection.SubnetMask = subnetMask;
+                }
+                else
+                {
+                    throw new Exception(errorMessage);
+                }
+
                 // check if network ip and subnet combo are valid
                 if ((subnetCollection.NetworkID.ToUint32() & subnetCollection.SubnetMask.ToUint32()) != subnetCollection.NetworkID.ToUint32())
                 {
@@ -273,52 +259,48 @@ namespace VLSM_Calc
         /// <param name="e"></param>
         private void DivideButton_Click(object sender, RoutedEventArgs e)
         {
-            // check input
-            if (!numberRegex.IsMatch(hostBox.Text.Trim()))
+            try
             {
-                MessageBox.Show("Invalid number of subnets");
-                return;
+                // get subnet mask
+                int totalSubnetMask;
+                if (InputParser.TryParseSubnetMask(subnetMaskBox.Text.Trim(), out IPAddress subnetMask, out string errorMessage))
+                {
+                    totalSubnetMask = subnetMask.ToCidr();
+                }
+                else
+                {
+                    throw new FormatException(errorMessage);
+                }
+
+                // get number from input
+                int subnetAmount = Convert.ToInt32(hostBox.Text.Trim());
+
+                // check if power of 2 and which power
+                int power = 0;
+                while (((subnetAmount >> power) & 1) == 0)
+                {
+                    power++;
+                }
+
+                if (subnetAmount >> (power + 1) > 0)
+                {
+                    throw new FormatException("Invalid number of subnets, must be a power of 2");
+                }
+
+                // empty list of requests
+                requests.Clear();
+
+                // create requests
+                int amountOfHosts = (int) Math.Pow(2, 32 - totalSubnetMask - power) - 2;
+
+                for (int i = 0; i < subnetAmount; i++)
+                {
+                    requests.Add(new UserRequest(amountOfHosts));
+                }
             }
-
-            // get subnet mask
-            int totalSubnetMask;
-            if (subnetMaskBox.Text.Contains("/"))
+            catch (FormatException exception)
             {
-                // get value behind / and use bitwise NOT to create subnet mask
-                totalSubnetMask = Convert.ToInt32(subnetMaskBox.Text.Replace("/", ""));
-            }
-            else
-            {
-                // split into 4 parts
-                string[] ipBytes = subnetMaskBox.Text.Split('.');
-                totalSubnetMask = (new IPAddress(Convert.ToByte(ipBytes[0]), Convert.ToByte(ipBytes[1]), Convert.ToByte(ipBytes[2]), Convert.ToByte(ipBytes[3]))).ToCidr();
-            }
-
-            // get number from input
-            int subnetAmount = Convert.ToInt32(hostBox.Text.Trim());
-
-            // check if power of 2 and which power
-            int power = 0;
-            while (((subnetAmount >> power) & 1) == 0)
-            {
-                power++;
-            }
-
-            if (subnetAmount >> (power + 1) > 0)
-            {
-                MessageBox.Show("Invalid number of subnets, must be a power of 2");
-                return;
-            }
-
-            // empty list of requests
-            requests.Clear();
-
-            // create requests
-            int amountOfHosts = (int) Math.Pow(2, 32 - totalSubnetMask - power) - 2;
-
-            for (int i = 0; i < subnetAmount; i++)
-            {
-                requests.Add(new UserRequest(amountOfHosts));
+                MessageBox.Show(exception.Message);
             }
         }
 
