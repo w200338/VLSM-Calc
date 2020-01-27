@@ -51,5 +51,11 @@ of the window like in VLSM mode.
 
 ## Tools
 ### Subnet size calculator
+Calculates the amount of hosts available in a given subnet mask or cidr notation.
+
+### Subnet converter
 Let's you convert (valid) subnet masks to their cidr notation and 
 vice versa.
+
+### Wildcard mask converter
+Let's you convert a subnet mask or cidr notation to its wildcard mask and vice versa.
